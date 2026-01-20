@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar"; // Import the component
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "The Neighbors | Coffee & Books",
-  description: "A chill space for coffee, books, and community.",
+  title: "The Neighbors | Coffee & Chapters",
+  description: "A chill space for coffee and books.",
 };
 
 export default function RootLayout({
@@ -15,8 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <Navbar />
-        <main>{children}</main>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
       </body>
     </html>
   );
