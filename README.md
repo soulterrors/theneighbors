@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+The Neighbors — Coffee & Chapters
+Welcome to the digital home of The Neighbors, a cozy community hub based in Ohio. This project is a specialized e-commerce and storytelling platform built to bridge the gap between carefully curated coffee and deeply moving literature.
 
-## Getting Started
+☕ Project Overview
+The Neighbors is designed with a "lo-fi" and "antique" aesthetic, focusing on eye comfort and a slow-living atmosphere. The platform serves as a "Digital Chalkboard" and promotional hub for:
 
-First, run the development server:
+The Brews: A specialized coffee inventory featuring house pours, lattes, and a health-focused "Greenhouse" secret menu.
 
-```bash
+The Chapters: A curated library of books and zines.
+
+The Atmosphere: A community-driven space that highlights vinyl-spinning listening corners and weekly poetry slams.
+
+🛠️ Tech Stack
+Framework: Next.js (App Router).
+
+Styling: Tailwind CSS.
+
+Animations: Framer Motion for micro-interactions and smooth transitions.
+
+Icons: Lucide React.
+
+State Management: React Context API for a persistent, scalable inventory and cart system.
+
+Planned Integration: Supabase for persistent database management of orders and inventory.
+
+✨ Key Features
+Responsive Design: Fully optimized for mobile devices, including landscape orientation support for devices like the Google Pixel 10.
+
+Smart Inventory: A unified data structure that separates coffee-specific details (roast, origin) from book-specific details (author, genre).
+
+Persistent Navigation: A sticky navbar and CTA banner that stay accessible as users scroll through the shop’s story.
+
+Dynamic Cart: A real-time shopping cart that tracks "Ink Points" as part of the "Start a Tab" rewards program.
+
+🚀 Getting Started
+Clone the repository:
+
+Bash
+
+git clone https://github.com/soulterrors/theneighbors.git
+(Note: Using the "soulterrors" GitHub alias associated with Alex Edwards)
+
+Install dependencies:
+
+Bash
+
+npm install
+Run the development server:
+
+Bash
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open the site: Navigate to http://localhost:3000 to view the landing page.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📖 About the Developer
+This project is maintained by Alex Edwards, a Computer Science student at Maestro University specializing in AI and Business pathways. Alex is also a musician (nmtmo) and an avid gamer, bringing a unique creative perspective to the lofi-inspired design of The Neighbors.
