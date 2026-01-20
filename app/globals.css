@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* 2. Theme configurations come next */
 @theme {
   --font-serif: "EB Garamond", serif;
   --font-sans: "Inter", sans-serif;
@@ -10,7 +9,6 @@
   --color-background: #fdfcf8;
 }
 
-/* 3. Custom layers and standard CSS rules come last */
 @layer base {
   body {
     background-color: var(--color-background);

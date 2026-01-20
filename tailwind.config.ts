@@ -9,7 +9,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Our Antique/Lofi Palette
         background: "#fdfcf8", // Creamy paper
         foreground: "#1c1c1c", // Ink black
         accent: "#8b4513",     // Leather brown
