@@ -1,26 +1,22 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 2. Theme configurations come next */
+@theme {
+  --font-serif: "EB Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-ink: #1c1c1c;
+  --color-tan: #a68a56;
+  --color-background: #fdfcf8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* 3. Custom layers and standard CSS rules come last */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    /* Ensuring the clean, antique look starts here */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
