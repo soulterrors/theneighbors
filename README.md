@@ -1,56 +1,51 @@
-The Neighbors — Coffee & Chapters
-Welcome to the digital home of The Neighbors, a cozy community hub based in Ohio. This project is a specialized e-commerce and storytelling platform built to bridge the gap between carefully curated coffee and deeply moving literature.
+The Neighbors — Coffee & Chapters (W.I.P)
 
-☕ Project Overview
-The Neighbors is designed with a "lo-fi" and "antique" aesthetic, focusing on eye comfort and a slow-living atmosphere. The platform serves as a "Digital Chalkboard" and promotional hub for:
+Welcome to the digital home of **The Neighbors**, a cozy community hub based in Ohio. This project is a specialized e-commerce and storytelling platform designed to bridge the gap between carefully curated coffee and deeply moving literature.
 
-The Brews: A specialized coffee inventory featuring house pours, lattes, and a health-focused "Greenhouse" secret menu.
+---
 
-The Chapters: A curated library of books and zines.
+### ☕ Project Overview
 
-The Atmosphere: A community-driven space that highlights vinyl-spinning listening corners and weekly poetry slams.
+* **The Neighbors** is designed with a "neighborly" aesthetic.
+* The platform focuses on eye comfort and a "slow-living" atmosphere.
+* It serves as a "Digital Chalkboard" and promotional hub for the local shop.
+* **The Brews**: Includes a specialized coffee inventory featuring house pours, lattes, and a health-focused "Greenhouse" secret menu.
+* **The Chapters**: Features a curated library of books, independent zines, and vintage first-editions.
+* **The Atmosphere**: Highlights a community-driven space with vinyl-spinning listening corners and weekly poetry slams.
 
-🛠️ Tech Stack
-Framework: Next.js (App Router).
+---
 
-Styling: Tailwind CSS.
+### 🛠️ Tech Stack
 
-Animations: Framer Motion for micro-interactions and smooth transitions.
+* **Framework**: Next.js (App Router).
+* **Styling**: Tailwind CSS.
+* **Animations**: Framer Motion for micro-interactions, character-level hover effects, and smooth transitions.
+* **Icons**: Lucide React.
+* **State Management**: React Context API for a persistent, scalable inventory and cart system.
+* **Architecture**: Discriminated Unions in TypeScript to separate coffee-specific data from book-specific data.
 
-Icons: Lucide React.
+---
 
-State Management: React Context API for a persistent, scalable inventory and cart system.
+### ✨ Key Features
 
-Planned Integration: Supabase for persistent database management of orders and inventory.
+* **Responsive Design**: Fully optimized for mobile devices, including specific landscape orientation support for the Google Pixel 10.
+* **Smart Inventory**: A unified data structure that separates coffee details (roast, origin) from book details (author, genre).
+* **Persistent Navigation**: Features a sticky navbar with desktop hover animations and a sticky CTA banner that stays accessible during scrolling.
+* **Dynamic Cart**: A real-time shopping cart that integrates with the "Start a Tab" rewards program to track "Ink Points".
+* **Mobile Menu**: An accordion-style mobile footer and a scrollable hamburger menu overlay for restricted vertical viewports.
 
-✨ Key Features
-Responsive Design: Fully optimized for mobile devices, including landscape orientation support for devices like the Google Pixel 10.
+---
 
-Smart Inventory: A unified data structure that separates coffee-specific details (roast, origin) from book-specific details (author, genre).
+### 🚀 Getting Started
 
-Persistent Navigation: A sticky navbar and CTA banner that stay accessible as users scroll through the shop’s story.
+* **Clone the repository**: Use `git clone https://github.com/soulterrors/theneighbors.git`
+* **Install dependencies**: Run `npm install` in the project root.
+* **Run the development server**: Start the project with `npm run dev`.
+* **View the site**: Navigate to `http://localhost:3000` to see the landing page.
 
-Dynamic Cart: A real-time shopping cart that tracks "Ink Points" as part of the "Start a Tab" rewards program.
+---
 
-🚀 Getting Started
-Clone the repository:
+### 📖 About the Developer
 
-Bash
-
-git clone https://github.com/soulterrors/theneighbors.git
-(Note: Using the "soulterrors" GitHub alias associated with Alex Edwards)
-
-Install dependencies:
-
-Bash
-
-npm install
-Run the development server:
-
-Bash
-
-npm run dev
-Open the site: Navigate to http://localhost:3000 to view the landing page.
-
-📖 About the Developer
-This project is maintained by Alex Edwards, a Computer Science student at Maestro University specializing in AI and Business pathways. Alex is also a musician (nmtmo) and an avid gamer, bringing a unique creative perspective to the lofi-inspired design of The Neighbors.
+* This project is maintained by **Alex Edwards**, a Computer Science student at Maestro University.
+* Alex is pursuing a Bachelor of Computer Science with a Business and AI pathway.
