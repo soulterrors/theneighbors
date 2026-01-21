@@ -23,7 +23,6 @@ export default function Navbar() {
     { name: 'Coffee', href: '/coffee' },
     { name: 'Library', href: '/library' },
     { name: 'Events', href: '/events' },
-    { name: 'About', href: '/about' }
   ];
 
   return (
@@ -88,7 +87,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - Responsive for Landscape */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
