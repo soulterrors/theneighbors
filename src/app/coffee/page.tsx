@@ -16,7 +16,10 @@ export default async function CoffeePage() {
   // Curation Logic
   const featured = products.filter(p => p.price > 6.00).slice(0, 3);
   const greenhouse = products.filter(p => p.description.toLowerCase().includes('greenhouse') || p.name.includes('Matcha'));
-  const regulars = products.filter(p => !greenhouse.includes(p) && !featured.includes(p));
+
+  const featuredSet = new Set(featured);
+  const greenhouseSet = new Set(greenhouse);
+  const regulars = products.filter(p => !greenhouseSet.has(p) && !featuredSet.has(p));
 
   return (
     <main className="min-h-screen bg-[#fdfcf8] text-[#1c1c1c] pb-32 px-4 md:px-8">
