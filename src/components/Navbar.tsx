@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingBag, Search, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { debounce } from '../utils/performance';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -14,8 +15,10 @@ export default function Navbar() {
     const handleResize = () => {
       if (window.innerWidth > 1024) setIsMenuOpen(false);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    const debouncedHandleResize = debounce(handleResize, 150);
+    window.addEventListener('resize', debouncedHandleResize);
+    return () => window.removeEventListener('resize', debouncedHandleResize);
   }, []);
 
   const navLinks = [
