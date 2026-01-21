@@ -131,7 +131,7 @@ export default function Home() {
             </div>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#2c2926]">Start a Tab.</h2>
             <p className="text-sm font-sans text-[#2c2926]/70 leading-relaxed italic">
-              Become a regular. Earn "Ink Points" with every cup and book. Redeem them for limited edition zines or your morning pour-over.
+              Become a regular. Earn &quot;Ink Points&quot; with every cup and book. Redeem them for limited edition zines or your morning pour-over.
             </p>
             <Link href="/account" className="inline-block w-fit text-[11px] uppercase tracking-[0.2em] bg-[#2c2926] text-white px-8 py-4 rounded-sm hover:bg-[#8b5e3c] transition-colors">
               Join the Circle
@@ -172,7 +172,7 @@ export default function Home() {
           >
             <h3 className="text-2xl font-serif font-bold">New Chapters</h3>
             <p className="text-xs uppercase tracking-widest leading-loose max-w-xs">
-              Check out this month's curated selection of independent zines and vintage first-editions.
+              Check out this month&apos;s curated selection of independent zines and vintage first-editions.
             </p>
             <Link href="/library" className="text-[10px] border-b border-[#2c2926] pb-1 uppercase tracking-widest font-bold">
               Browse Library
@@ -199,7 +199,7 @@ export default function Home() {
             </div>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#2c2926]">The Off-Menu Elixirs.</h2>
             <p className="text-sm font-sans text-[#2c2926]/70 leading-relaxed max-w-md">
-              Our "Secret Menu" is actually our cleanest. Think functional mushrooms, house-made nut milks, and raw honey infusions. Better for the body, better for the mind.
+              Our &quot;Secret Menu&quot; is actually our cleanest. Think functional mushrooms, house-made nut milks, and raw honey infusions. Better for the body, better for the mind.
             </p>
             <Link href="/coffee?category=secret" className="inline-block text-[11px] border-b-2 border-[#4a5d4e] pb-1 uppercase tracking-[0.2em] font-bold text-[#2c2926]">
               Ask the Barista
