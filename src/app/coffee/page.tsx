@@ -9,20 +9,35 @@ export const revalidate = 3600;
 export default async function CoffeePage() {
   const supabase = await getSupabase();
   
-  const { data: products } = await supabase
-    .from('products')
-    .select('id, name, price, image_url, description, category')
-    .eq('category', 'coffee');
+  // PARALLEL QUERIES FOR SCALABILITY
+  const [featuredData, greenhouseData, regularsData] = await Promise.all([
+    // Query 1: Featured (Limit 3, price > 6.00)
+    supabase
+      .from('products')
+      .select('id, name, price, image_url, description, category')
+      .eq('category', 'coffee')
+      .gt('price', 6.00)
+      .limit(3),
 
-  if (!products || products.length === 0) return null;
+    // Query 2: Greenhouse (Limit 6, text search)
+    supabase
+      .from('products')
+      .select('id, name, price, image_url, description, category')
+      .eq('category', 'coffee')
+      .or('description.ilike.%greenhouse%,name.ilike.%Matcha%')
+      .limit(6),
 
-  // CURATION LOGIC
-  const featured = products.filter(p => p.price > 6.00).slice(0, 3);
-  const greenhouse = products.filter(p => 
-    p.description.toLowerCase().includes('greenhouse') || 
-    p.name.includes('Matcha')
-  );
-  const regulars = products.filter(p => !greenhouse.includes(p) && !featured.includes(p));
+    // Query 3: Regulars (Limit 12, general selection)
+    supabase
+      .from('products')
+      .select('id, name, price, image_url, description, category')
+      .eq('category', 'coffee')
+      .limit(12)
+  ]);
+
+  const featured = featuredData.data || [];
+  const greenhouse = greenhouseData.data || [];
+  const regulars = regularsData.data || [];
 
   // REUSABLE VIEW ALL BUTTON
   const ViewAllButton = () => (
