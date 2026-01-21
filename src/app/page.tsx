@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Sparkles, Leaf, Coffee, ArrowDown } from 'lucide-react';
 
 export default function Home() {
@@ -24,10 +25,13 @@ export default function Home() {
       {/* Changed height from fixed 85vh to min-h-screen to support mobile landscape */}
       <section className="relative min-h-[600px] md:h-[85vh] w-full flex items-center justify-center overflow-hidden py-20 lg:py-0">
         <div className="absolute inset-0 z-0">
-          <img 
+          <Image
             src="https://images.unsplash.com/photo-1481833761820-0509d3217039?q=80&w=2000" 
             alt="The Neighbors Coffee Shop Interior" 
-            className="w-full h-full object-cover sepia-[0.2] contrast-[0.9] brightness-[0.7]"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover sepia-[0.2] contrast-[0.9] brightness-[0.7]"
           />
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/p6.png')] opacity-30 pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-[#ece9e1]/10" />
@@ -96,10 +100,12 @@ export default function Home() {
         {/* --- MAIN SPOTLIGHT --- */}
         <section className="grid md:grid-cols-2 bg-[#1e3932] text-white overflow-hidden rounded-sm shadow-xl">
           <div className="relative aspect-square md:aspect-auto h-[300px] md:h-auto">
-            <img 
+            <Image
               src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=1000" 
               alt="Seasonal Brew" 
-              className="w-full h-full object-cover sepia-[0.1] contrast-[1.1]"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover sepia-[0.1] contrast-[1.1]"
             />
           </div>
           <div className="flex flex-col justify-center items-center text-center p-8 md:p-20 space-y-6">
@@ -177,10 +183,12 @@ export default function Home() {
         {/* --- SECRET MENU --- */}
         <section className="grid md:grid-cols-2 gap-8 items-center bg-[#fdfcf8] py-12">
           <div className="order-2 md:order-1 relative h-[400px] md:h-[500px] rounded-sm overflow-hidden group border border-[#dcd7cc]">
-            <img 
+            <Image
               src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1000" 
               alt="Healthier Choices" 
-              className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-[#4a5d4e]/10" />
           </div>
@@ -201,11 +209,13 @@ export default function Home() {
 
         {/* --- THE LISTENING CORNER --- */}
         <section className="bg-[#2c2926] text-[#f4f1ea] rounded-sm overflow-hidden flex flex-col md:flex-row shadow-2xl">
-          <div className="md:w-1/3 h-64 md:h-auto overflow-hidden">
-            <img 
+          <div className="relative md:w-1/3 h-64 md:h-auto overflow-hidden">
+            <Image
               src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000" 
               alt="Vinyl Records" 
-              className="w-full h-full object-cover opacity-60"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover opacity-60"
             />
           </div>
           <div className="md:w-2/3 p-8 md:p-20 flex flex-col justify-center text-left">
