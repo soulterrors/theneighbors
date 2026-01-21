@@ -3,7 +3,16 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ShoppingCart } from 'lucide-react';
 
-export function CoffeeCard({ item, variant }: { item: any, variant: 'featured' | 'standard' }) {
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image_url: string;
+  description: string;
+  category?: string;
+}
+
+export function CoffeeCard({ item, variant }: { item: Product, variant: 'featured' | 'standard' }) {
   const isFeatured = variant === 'featured';
 
   return (
