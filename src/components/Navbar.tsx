@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingBag, Search, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { debounce } from '../utils/performance';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -18,11 +19,9 @@ export default function Navbar() {
       if (e.matches) setIsMenuOpen(false);
     };
 
-    // Initial check
-    handleMediaChange(mediaQuery);
-
-    mediaQuery.addEventListener('change', handleMediaChange);
-    return () => mediaQuery.removeEventListener('change', handleMediaChange);
+    const debouncedHandleResize = debounce(handleResize, 150);
+    window.addEventListener('resize', debouncedHandleResize);
+    return () => window.removeEventListener('resize', debouncedHandleResize);
   }, []);
 
   const navLinks = [
