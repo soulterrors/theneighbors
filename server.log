@@ -1,0 +1,24 @@
+
+> theneighbors@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+
+✓ Starting...
+✓ Ready in 1164ms
+○ Compiling /menu ...
+⨯ Error: Missing Supabase Environment Variables. Check your .env.local file.
+    at <unknown> (src/utils/supabase/server.ts:12:11)
+    at async OrderPage (src/app/menu/page.tsx:18:20)
+  10 |
+  11 |   if (!supabaseUrl || !supabaseAnonKey) {
+> 12 |     throw new Error(
+     |           ^
+  13 |       "Missing Supabase Environment Variables. Check your .env.local file."
+  14 |     )
+  15 |   } {
+  digest: '3809484864'
+}
+ GET /menu 500 in 7.4s (compile: 6.8s, render: 629ms)

@@ -27,7 +27,7 @@ export default async function OrderPage({
   // 2. Fetch Paginated Data from 'products' table
   const { data: products, count } = await supabase
     .from('products')
-    .select('*', { count: 'exact' })
+    .select('id, name, price, image_url, description, category', { count: 'exact' })
     .in('category', ['coffee', 'book'])
     .range(from, to);
 

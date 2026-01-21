@@ -26,7 +26,6 @@ export function CoffeeCard({ item, variant }: { item: any, variant: 'featured' |
           priority={isFeatured}
           sizes="(max-width: 768px) 100vw, 33vw"
           className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-in-out"
-          unoptimized // Remove this once your Vercel/Sharp setup is 100% verified
         />
         
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md p-2 rounded-full shadow-sm">

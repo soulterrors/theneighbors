@@ -9,29 +9,42 @@ export const revalidate = 3600; // Vercel Speed Boost
 export default async function LibraryPage() {
   const supabase = await getSupabase();
   
-  // Fetch all books from the shared products table
-  const { data: products } = await supabase
-    .from('products')
-    .select('id, name, price, image_url, description, category')
-    .eq('category', 'book');
+  // PARALLEL QUERIES FOR SCALABILITY
+  const [favoritesData, staffPicksData, classicsData] = await Promise.all([
+    // Query 1: Favorites (Limit 3)
+    supabase
+      .from('products')
+      .select('id, name, price, image_url, description, category')
+      .eq('category', 'book')
+      .limit(3),
 
-  if (!products || products.length === 0) {
+    // Query 2: Staff Picks (Limit 6, Price > 15)
+    supabase
+      .from('products')
+      .select('id, name, price, image_url, description, category')
+      .eq('category', 'book')
+      .gt('price', 15)
+      .limit(6),
+
+    // Query 3: Classics (Limit 12, general selection)
+    supabase
+      .from('products')
+      .select('id, name, price, image_url, description, category')
+      .eq('category', 'book')
+      .limit(12)
+  ]);
+
+  const favorites = favoritesData.data || [];
+  const staffPicks = staffPicksData.data || [];
+  const classics = classicsData.data || [];
+
+  if (favorites.length === 0 && staffPicks.length === 0 && classics.length === 0) {
     return (
       <div className="h-screen flex items-center justify-center bg-[#fdfcf8]">
         <p className="font-serif italic text-stone-400">The shelves are currently being organized...</p>
       </div>
     );
   }
-
-  // --- CURATION LOGIC ---
-  // 1. Favorites: The top-tier spotlight (First 3 books)
-  const favorites = products.slice(0, 3); 
-
-  // 2. Staff Picks: Premium curated selections (Price > $15)
-  const staffPicks = products.filter(p => !favorites.includes(p) && p.price > 15).slice(0, 6);
-
-  // 3. Classics: The rest of the collection
-  const classics = products.filter(p => !favorites.includes(p) && !staffPicks.includes(p));
 
   // --- REUSABLE VIEW ALL BUTTON ---
   const ViewAllButton = () => (
