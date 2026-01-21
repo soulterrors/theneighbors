@@ -14,7 +14,7 @@ export default function Home() {
       <div className="bg-[#2c2926] text-[#f4f1ea] py-3 px-6 flex justify-center items-center gap-4 sticky top-24 z-[95] shadow-md border-b border-white/5">
         <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium italic">Your table is waiting</span>
         <Link 
-          href="/coffee" 
+          href="/menu" 
           className="text-[10px] uppercase tracking-[0.2em] font-bold border border-[#f4f1ea] px-4 py-1.5 rounded-full hover:bg-[#8b5e3c] transition-all"
         >
           Start an order

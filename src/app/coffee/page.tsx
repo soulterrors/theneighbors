@@ -1,7 +1,10 @@
 import { getSupabase } from '@/src/utils/supabase/server';
-import { CoffeeCard } from '@/src/components/CoffeeCard';
-import { Star, Leaf, Coffee as CoffeeIcon } from 'lucide-react';
+import { CoffeeCard } from '@/src/components/CoffeeCard'; 
+import { Star, Leaf, Coffee as CoffeeIcon, ChevronRight } from 'lucide-react';
 import * as motion from 'framer-motion/client';
+import Link from 'next/link';
+
+export const revalidate = 3600;
 
 export default async function CoffeePage() {
   const supabase = await getSupabase();
@@ -11,21 +14,36 @@ export default async function CoffeePage() {
     .select('id, name, price, image_url, description, category')
     .eq('category', 'coffee');
 
-  if (!products) return null;
+  if (!products || products.length === 0) return null;
 
-  // Curation Logic
+  // CURATION LOGIC
   const featured = products.filter(p => p.price > 6.00).slice(0, 3);
-  const greenhouse = products.filter(p => p.description.toLowerCase().includes('greenhouse') || p.name.includes('Matcha'));
+  const greenhouse = products.filter(p => 
+    p.description.toLowerCase().includes('greenhouse') || 
+    p.name.includes('Matcha')
+  );
+  const regulars = products.filter(p => !greenhouse.includes(p) && !featured.includes(p));
 
-  const featuredSet = new Set(featured);
-  const greenhouseSet = new Set(greenhouse);
-  const regulars = products.filter(p => !greenhouseSet.has(p) && !featuredSet.has(p));
+  // REUSABLE VIEW ALL BUTTON
+  const ViewAllButton = () => (
+    <div className="flex justify-center py-12">
+      <Link href="/coffee/all">
+        <motion.button
+          whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
+          whileTap={{ scale: 0.95 }}
+          className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
+        >
+          Browse All Drinks
+          <ChevronRight size={14} className="opacity-40" />
+        </motion.button>
+      </Link>
+    </div>
+  );
 
   return (
     <main className="min-h-screen bg-[#fdfcf8] text-[#1c1c1c] pb-32 px-4 md:px-8">
       
-      {/* HEADER */}
-      <header className="pt-24 pb-16 text-center">
+      <header className="pt-24 pb-8 text-center">
         <motion.h1 
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,15 +56,16 @@ export default async function CoffeePage() {
         </p>
       </header>
 
+      <ViewAllButton />
+
       <div className="max-w-7xl mx-auto space-y-16">
         
-        {/* SEASONAL SPOTLIGHT */}
+        {/* SECTION 1: SEASONAL SPOTLIGHT */}
         <section className="bg-[#1c1c1c] text-[#f4f1ea] rounded-[3.5rem] py-16 md:py-24 px-8 md:px-16 shadow-2xl">
           <div className="flex items-center gap-3 mb-12">
             <Star size={18} className="text-[#a68a56]" fill="currentColor" />
             <h2 className="text-xs font-bold uppercase tracking-[0.4em]">Seasonal Spotlight</h2>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {featured.map((item) => (
               <CoffeeCard key={item.id} item={item} variant="featured" />
@@ -54,13 +73,12 @@ export default async function CoffeePage() {
           </div>
         </section>
 
-        {/* THE GREENHOUSE */}
+        {/* SECTION 2: THE GREENHOUSE */}
         <section className="bg-[#e9ece9] rounded-[3.5rem] py-16 md:py-24 px-8 md:px-16 border border-[#dce2dc]">
           <div className="flex items-center gap-3 mb-12 text-[#4a5d4e]">
             <Leaf size={20} />
             <h2 className="text-3xl font-serif italic font-bold">The Greenhouse</h2>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {greenhouse.map((item) => (
               <CoffeeCard key={item.id} item={item} variant="standard" />
@@ -68,13 +86,12 @@ export default async function CoffeePage() {
           </div>
         </section>
 
-        {/* THE REGULARS */}
+        {/* SECTION 3: THE REGULARS */}
         <section className="bg-[#f2e8cf] rounded-[3.5rem] py-16 md:py-24 px-8 md:px-16 border border-[#e5d5b0]">
           <div className="flex items-center gap-3 text-stone-800 mb-12">
             <CoffeeIcon size={20} />
             <h2 className="text-3xl font-serif italic font-bold">The Regulars</h2>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {regulars.map((item) => (
               <CoffeeCard key={item.id} item={item} variant="standard" />
@@ -83,6 +100,8 @@ export default async function CoffeePage() {
         </section>
 
       </div>
+
+      <ViewAllButton />
     </main>
   );
 }
