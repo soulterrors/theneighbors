@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Sparkles, Leaf, Coffee, ArrowDown } from 'lucide-react';
 
 export default function Home() {
@@ -24,10 +25,13 @@ export default function Home() {
       {/* Changed height from fixed 85vh to min-h-screen to support mobile landscape */}
       <section className="relative min-h-[600px] md:h-[85vh] w-full flex items-center justify-center overflow-hidden py-20 lg:py-0">
         <div className="absolute inset-0 z-0">
-          <img 
+          <Image
             src="https://images.unsplash.com/photo-1481833761820-0509d3217039?q=80&w=2000" 
             alt="The Neighbors Coffee Shop Interior" 
-            className="w-full h-full object-cover sepia-[0.2] contrast-[0.9] brightness-[0.7]"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover sepia-[0.2] contrast-[0.9] brightness-[0.7]"
           />
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/p6.png')] opacity-30 pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-[#ece9e1]/10" />
@@ -96,10 +100,12 @@ export default function Home() {
         {/* --- MAIN SPOTLIGHT --- */}
         <section className="grid md:grid-cols-2 bg-[#1e3932] text-white overflow-hidden rounded-sm shadow-xl">
           <div className="relative aspect-square md:aspect-auto h-[300px] md:h-auto">
-            <img 
+            <Image
               src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=1000" 
               alt="Seasonal Brew" 
-              className="w-full h-full object-cover sepia-[0.1] contrast-[1.1]"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover sepia-[0.1] contrast-[1.1]"
             />
           </div>
           <div className="flex flex-col justify-center items-center text-center p-8 md:p-20 space-y-6">
@@ -125,7 +131,7 @@ export default function Home() {
             </div>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#2c2926]">Start a Tab.</h2>
             <p className="text-sm font-sans text-[#2c2926]/70 leading-relaxed italic">
-              Become a regular. Earn "Ink Points" with every cup and book. Redeem them for limited edition zines or your morning pour-over.
+              Become a regular. Earn &quot;Ink Points&quot; with every cup and book. Redeem them for limited edition zines or your morning pour-over.
             </p>
             <Link href="/account" className="inline-block w-fit text-[11px] uppercase tracking-[0.2em] bg-[#2c2926] text-white px-8 py-4 rounded-sm hover:bg-[#8b5e3c] transition-colors">
               Join the Circle
@@ -166,7 +172,7 @@ export default function Home() {
           >
             <h3 className="text-2xl font-serif font-bold">New Chapters</h3>
             <p className="text-xs uppercase tracking-widest leading-loose max-w-xs">
-              Check out this month's curated selection of independent zines and vintage first-editions.
+              Check out this month&apos;s curated selection of independent zines and vintage first-editions.
             </p>
             <Link href="/library" className="text-[10px] border-b border-[#2c2926] pb-1 uppercase tracking-widest font-bold">
               Browse Library
@@ -177,10 +183,12 @@ export default function Home() {
         {/* --- SECRET MENU --- */}
         <section className="grid md:grid-cols-2 gap-8 items-center bg-[#fdfcf8] py-12">
           <div className="order-2 md:order-1 relative h-[400px] md:h-[500px] rounded-sm overflow-hidden group border border-[#dcd7cc]">
-            <img 
+            <Image
               src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1000" 
               alt="Healthier Choices" 
-              className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-[#4a5d4e]/10" />
           </div>
@@ -191,7 +199,7 @@ export default function Home() {
             </div>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#2c2926]">The Off-Menu Elixirs.</h2>
             <p className="text-sm font-sans text-[#2c2926]/70 leading-relaxed max-w-md">
-              Our "Secret Menu" is actually our cleanest. Think functional mushrooms, house-made nut milks, and raw honey infusions. Better for the body, better for the mind.
+              Our &quot;Secret Menu&quot; is actually our cleanest. Think functional mushrooms, house-made nut milks, and raw honey infusions. Better for the body, better for the mind.
             </p>
             <Link href="/coffee?category=secret" className="inline-block text-[11px] border-b-2 border-[#4a5d4e] pb-1 uppercase tracking-[0.2em] font-bold text-[#2c2926]">
               Ask the Barista
@@ -201,11 +209,13 @@ export default function Home() {
 
         {/* --- THE LISTENING CORNER --- */}
         <section className="bg-[#2c2926] text-[#f4f1ea] rounded-sm overflow-hidden flex flex-col md:flex-row shadow-2xl">
-          <div className="md:w-1/3 h-64 md:h-auto overflow-hidden">
-            <img 
+          <div className="relative md:w-1/3 h-64 md:h-auto overflow-hidden">
+            <Image
               src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000" 
               alt="Vinyl Records" 
-              className="w-full h-full object-cover opacity-60"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover opacity-60"
             />
           </div>
           <div className="md:w-2/3 p-8 md:p-20 flex flex-col justify-center text-left">
