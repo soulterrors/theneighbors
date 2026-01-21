@@ -3,7 +3,15 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ShoppingCart } from 'lucide-react';
 
-export function CoffeeCard({ item, variant }: { item: any, variant: 'featured' | 'standard' }) {
+interface CoffeeItem {
+  id: number;
+  name: string;
+  image_url: string;
+  price: number;
+  description: string;
+}
+
+export function CoffeeCard({ item, variant }: { item: CoffeeItem, variant: 'featured' | 'standard' }) {
   const isFeatured = variant === 'featured';
 
   return (
@@ -24,7 +32,7 @@ export function CoffeeCard({ item, variant }: { item: any, variant: 'featured' |
           alt={item.name}
           fill
           priority={isFeatured}
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
         />
       </div>

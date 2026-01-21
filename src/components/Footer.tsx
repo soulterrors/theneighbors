@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Instagram, Youtube, Twitter, Facebook, ChevronDown, Music2 } from 'lucide-react';
 
 export default function Footer() {

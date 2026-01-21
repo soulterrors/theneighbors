@@ -11,11 +11,18 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1024) setIsMenuOpen(false);
+    // ⚡ Bolt: Optimized resize listener using matchMedia to prevent excessive event firing
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+
+    const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) setIsMenuOpen(false);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    // Initial check
+    handleMediaChange(mediaQuery);
+
+    mediaQuery.addEventListener('change', handleMediaChange);
+    return () => mediaQuery.removeEventListener('change', handleMediaChange);
   }, []);
 
   const navLinks = [
