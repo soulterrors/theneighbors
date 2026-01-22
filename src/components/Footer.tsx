@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Instagram, Youtube, Twitter, Facebook, ChevronDown, Music2 } from 'lucide-react';
 
 export default function Footer() {
@@ -56,11 +56,11 @@ export default function Footer() {
         {/* --- SOCIAL & LEGAL SECTION --- */}
         <div className="flex flex-col space-y-8">
           <div className="flex items-center gap-4">
-            <SocialIcon icon={<Instagram size={20} />} href="https://instagram.com" />
-            <SocialIcon icon={<Music2 size={20} />} href="https://spotify.com" />
-            <SocialIcon icon={<Youtube size={20} />} href="https://youtube.com" />
-            <SocialIcon icon={<Twitter size={20} />} href="https://twitter.com" />
-            <SocialIcon icon={<Facebook size={20} />} href="https://facebook.com" />
+            <SocialIcon label="Instagram" icon={<Instagram size={20} />} href="https://instagram.com" />
+            <SocialIcon label="Spotify" icon={<Music2 size={20} />} href="https://spotify.com" />
+            <SocialIcon label="YouTube" icon={<Youtube size={20} />} href="https://youtube.com" />
+            <SocialIcon label="Twitter" icon={<Twitter size={20} />} href="https://twitter.com" />
+            <SocialIcon label="Facebook" icon={<Facebook size={20} />} href="https://facebook.com" />
           </div>
 
           {/* Legal Links (Stacked on Mobile) */}
@@ -87,6 +87,7 @@ function FooterColumn({ title, links }: { title: string; links: { name: string; 
   return (
     <div className="flex flex-col">
       <button 
+        aria-expanded={isOpen}
         className="flex items-center justify-between w-full md:cursor-default"
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -119,10 +120,11 @@ function FooterColumn({ title, links }: { title: string; links: { name: string; 
   );
 }
 
-function SocialIcon({ icon, href }: { icon: React.ReactNode; href: string }) {
+function SocialIcon({ icon, href, label }: { icon: React.ReactNode; href: string; label: string }) {
   return (
     <Link 
       href={href} 
+      aria-label={label}
       className="w-10 h-10 rounded-full bg-[#1c1c1c] text-[#f4f1ea] flex items-center justify-center hover:bg-[#a68a56] transition-all"
     >
       {icon}
