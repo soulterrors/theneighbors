@@ -39,22 +39,6 @@ export default async function CoffeePage() {
   const greenhouse = greenhouseData.data || [];
   const regulars = regularsData.data || [];
 
-  // REUSABLE VIEW ALL BUTTON
-  const ViewAllButton = () => (
-    <div className="flex justify-center py-12">
-      <Link href="/coffee/all">
-        <motion.button
-          whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
-          whileTap={{ scale: 0.95 }}
-          className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
-        >
-          Browse All Drinks
-          <ChevronRight size={14} className="opacity-40" />
-        </motion.button>
-      </Link>
-    </div>
-  );
-
   return (
     <main className="min-h-screen bg-[#fdfcf8] text-[#1c1c1c] pb-32 px-4 md:px-8">
       
@@ -120,3 +104,18 @@ export default async function CoffeePage() {
     </main>
   );
 }
+
+const ViewAllButton = () => (
+  <div className="flex justify-center py-12">
+    <Link href="/coffee/all">
+      <motion.button
+        whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
+        whileTap={{ scale: 0.95 }}
+        className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
+      >
+        Browse All Drinks
+        <ChevronRight size={14} className="opacity-40" />
+      </motion.button>
+    </Link>
+  </div>
+);

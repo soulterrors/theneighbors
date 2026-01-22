@@ -46,22 +46,6 @@ export default async function LibraryPage() {
     );
   }
 
-  // --- REUSABLE VIEW ALL BUTTON ---
-  const ViewAllButton = () => (
-    <div className="flex justify-center py-12">
-      <Link href="/library/all">
-        <motion.button
-          whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
-          whileTap={{ scale: 0.95 }}
-          className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
-        >
-          Browse All Books
-          <ChevronRight size={14} className="opacity-40" />
-        </motion.button>
-      </Link>
-    </div>
-  );
-
   return (
     <main className="min-h-screen bg-[#fdfcf8] text-[#1c1c1c] pb-32 px-4 md:px-8">
       
@@ -76,7 +60,7 @@ export default async function LibraryPage() {
             The Library
           </h1>
           <p className="text-stone-400 text-[10px] uppercase tracking-[0.6em] mt-6 font-bold">
-            Quiet Corners & Neighbors' Picks
+            Quiet Corners & Neighbors&apos; Picks
           </p>
         </motion.div>
       </header>
@@ -139,3 +123,18 @@ export default async function LibraryPage() {
     </main>
   );
 }
+
+const ViewAllButton = () => (
+  <div className="flex justify-center py-12">
+    <Link href="/library/all">
+      <motion.button
+        whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
+        whileTap={{ scale: 0.95 }}
+        className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
+      >
+        Browse All Books
+        <ChevronRight size={14} className="opacity-40" />
+      </motion.button>
+    </Link>
+  </div>
+);

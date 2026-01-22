@@ -3,9 +3,19 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ShoppingCart, BookOpen, Coffee } from 'lucide-react';
 
-export function CoffeeCard({ item, variant }: { item: any, variant: 'featured' | 'standard' }) {
+interface CoffeeItem {
+  id?: number | string;
+  name: string;
+  price: number;
+  image_url: string | null;
+  description: string;
+  category: string;
+}
+
+export function CoffeeCard({ item, variant, priority = false }: { item: CoffeeItem, variant: 'featured' | 'standard', priority?: boolean }) {
   const isFeatured = variant === 'featured';
   const isBook = item.category === 'book';
+  const shouldPrioritize = isFeatured || priority;
 
   return (
     <motion.div 
@@ -23,7 +33,7 @@ export function CoffeeCard({ item, variant }: { item: any, variant: 'featured' |
           src={item.image_url || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085'} 
           alt={item.name}
           fill
-          priority={isFeatured}
+          priority={shouldPrioritize}
           sizes="(max-width: 768px) 100vw, 33vw"
           className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-in-out"
         />
