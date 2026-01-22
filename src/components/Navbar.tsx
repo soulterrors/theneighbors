@@ -5,20 +5,23 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingBag, Search, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { debounce } from '../utils/performance';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1024) setIsMenuOpen(false);
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+
+    const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) setIsMenuOpen(false);
     };
 
-    const debouncedHandleResize = debounce(handleResize, 150);
-    window.addEventListener('resize', debouncedHandleResize);
-    return () => window.removeEventListener('resize', debouncedHandleResize);
+    // Initial check
+    handleMediaChange(mediaQuery);
+
+    mediaQuery.addEventListener('change', handleMediaChange);
+    return () => mediaQuery.removeEventListener('change', handleMediaChange);
   }, []);
 
   const navLinks = [
@@ -77,13 +80,25 @@ export default function Navbar() {
 
           {/* Right Icons */}
           <div className="flex items-center justify-end space-x-8 w-1/4">
-            <motion.button whileHover={{ y: -3, scale: 1.1 }} className="hidden lg:block text-[#1c1c1c]/50">
+            <motion.button
+              aria-label="Search"
+              whileHover={{ y: -3, scale: 1.1 }}
+              className="hidden lg:block text-[#1c1c1c]/50"
+            >
               <Search size={18} strokeWidth={1.2} />
             </motion.button>
-            <motion.button whileHover={{ y: -3, scale: 1.1 }} className="hidden lg:block text-[#1c1c1c]/50">
+            <motion.button
+              aria-label="View cart"
+              whileHover={{ y: -3, scale: 1.1 }}
+              className="hidden lg:block text-[#1c1c1c]/50"
+            >
               <ShoppingBag size={18} strokeWidth={1.2} />
             </motion.button>
-            <button onClick={() => setIsMenuOpen(true)} className="lg:hidden p-2 text-[#1c1c1c]">
+            <button
+              aria-label="Open menu"
+              onClick={() => setIsMenuOpen(true)}
+              className="lg:hidden p-2 text-[#1c1c1c]"
+            >
               <Menu size={24} strokeWidth={1.2} />
             </button>
           </div>
@@ -105,7 +120,11 @@ export default function Navbar() {
               className="fixed top-0 right-0 h-full w-[320px] bg-[#ece9e1] z-[105] shadow-2xl border-l border-[#dcd7cc] overflow-y-auto overflow-x-hidden"
             >
               <div className="p-10 flex flex-col min-h-full">
-                <button onClick={() => setIsMenuOpen(false)} className="self-end p-2 text-[#1c1c1c]/40 mb-8">
+                <button
+                  aria-label="Close menu"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="self-end p-2 text-[#1c1c1c]/40 mb-8"
+                >
                   <X size={26} strokeWidth={1.2} />
                 </button>
                 <div className="flex flex-col space-y-8">
