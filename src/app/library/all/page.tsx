@@ -2,7 +2,6 @@ import { getSupabase } from '@/src/utils/supabase/server';
 import { CoffeeCard } from '@/src/components/CoffeeCard';
 import { ArrowLeft, Bookmark, Sparkles, Heart, Brain, PenTool, Globe, Terminal } from 'lucide-react';
 import Link from 'next/link';
-import * as motion from 'framer-motion/client';
 
 export const revalidate = 3600;
 
@@ -62,7 +61,7 @@ export default async function AllBooksPage() {
               
               {/* Library Note Card */}
               <div className="hidden lg:block p-8 bg-[#1a202c] text-[#f4f1ea] rounded-[2.5rem] shadow-xl">
-                <p className="text-xs font-serif italic mb-2 text-[#a68a56]">The Librarian's Note:</p>
+                <p className="text-xs font-serif italic mb-2 text-[#a68a56]">The Librarian&apos;s Note:</p>
                 <p className="text-[10px] leading-relaxed opacity-80 uppercase tracking-wider font-bold">
                   Take your time. A good book is meant to be discovered, not just found.
                 </p>

@@ -2,7 +2,6 @@ import { getSupabase } from '@/src/utils/supabase/server';
 import { CoffeeCard } from '@/src/components/CoffeeCard';
 import { ArrowLeft, Coffee, Droplets, Leaf, Star, Thermometer, Wind } from 'lucide-react';
 import Link from 'next/link';
-import * as motion from 'framer-motion/client';
 
 export const revalidate = 3600;
 
@@ -58,7 +57,7 @@ export default async function AllDrinksPage() {
               
               {/* Promo Card */}
               <div className="hidden lg:block p-8 bg-[#4a5d4e] text-[#eff2ef] rounded-[2.5rem] shadow-xl">
-                <p className="text-xs font-serif italic mb-2">Barista's Tip:</p>
+                <p className="text-xs font-serif italic mb-2">Barista&apos;s Tip:</p>
                 <p className="text-[10px] leading-relaxed opacity-80 uppercase tracking-wider font-bold">
                   Try the Cold Brew with a splash of oat milk for the smoothest finish.
                 </p>

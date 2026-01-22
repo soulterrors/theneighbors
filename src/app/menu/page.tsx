@@ -2,10 +2,9 @@ import { getSupabase } from '@/src/utils/supabase/server';
 import { CoffeeCard } from '@/src/components/CoffeeCard';
 import { 
   ShoppingBag, Coffee, BookOpen, Star, 
-  Droplets, Leaf, Terminal, Heart, Sparkles,
+  Leaf, Terminal, Heart, Sparkles,
   ChevronLeft, ChevronRight 
 } from 'lucide-react';
-import * as motion from 'framer-motion/client';
 import Link from 'next/link';
 
 export const revalidate = 3600;
@@ -104,8 +103,8 @@ export default async function OrderPage({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {products.map((item) => (
-                <CoffeeCard key={item.id} item={item} variant="standard" />
+              {products.map((item, index) => (
+                <CoffeeCard key={item.id} item={item} variant="standard" priority={index < 4} />
               ))}
             </div>
 
