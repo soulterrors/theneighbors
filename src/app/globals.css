@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "EB Garamond", serif;
-  --font-sans: "Inter", sans-serif;
+  --font-serif: var(--font-eb-garamond), serif;
+  --font-sans: var(--font-inter), sans-serif;
   
   --color-ink: #1c1c1c;
   --color-tan: #a68a56;
