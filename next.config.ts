@@ -1,21 +1,40 @@
 import type { NextConfig } from "next";
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+let supabaseHostname = '';
+
+if (supabaseUrl) {
+  try {
+    const url = new URL(supabaseUrl);
+    supabaseHostname = url.hostname;
+  } catch (error) {
+    console.warn('⚠️ Sentinel Warning: Invalid NEXT_PUBLIC_SUPABASE_URL', error);
+  }
+} else {
+  console.warn('⚠️ Sentinel Warning: NEXT_PUBLIC_SUPABASE_URL is missing. Images from Supabase may not load.');
+}
+
+const remotePatterns = [
+  {
+    protocol: 'https' as const,
+    hostname: 'images.unsplash.com',
+    port: '',
+    pathname: '/**',
+  },
+];
+
+if (supabaseHostname) {
+  remotePatterns.push({
+    protocol: 'https' as const,
+    hostname: supabaseHostname,
+    port: '',
+    pathname: '/**',
+  });
+}
+
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.supabase.co',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    remotePatterns: remotePatterns,
   },
   async headers() {
     return [
