@@ -1,7 +1,8 @@
 "use client";
+import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ShoppingCart, BookOpen, Coffee } from 'lucide-react';
+import { ShoppingCart, BookOpen, Coffee, Check } from 'lucide-react';
 
 interface CoffeeItem {
   id?: number | string;
@@ -13,9 +14,15 @@ interface CoffeeItem {
 }
 
 export function CoffeeCard({ item, variant, priority = false }: { item: CoffeeItem, variant: 'featured' | 'standard', priority?: boolean }) {
+  const [isAdded, setIsAdded] = useState(false);
   const isFeatured = variant === 'featured';
   const isBook = item.category === 'book';
   const shouldPrioritize = isFeatured || priority;
+
+  const handleAddToCart = () => {
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+  };
 
   return (
     <motion.div 
@@ -63,12 +70,25 @@ export function CoffeeCard({ item, variant, priority = false }: { item: CoffeeIt
         </p>
 
         <motion.button 
-          whileHover={{ scale: 1.03, backgroundColor: "#4a5d4e" }}
-          whileTap={{ scale: 0.97 }}
-          className="w-full mt-4 bg-[#1c1c1c] text-white py-4 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 transition-colors duration-300"
+          onClick={handleAddToCart}
+          disabled={isAdded}
+          aria-label={isAdded ? "Added to cart" : `Add ${item.name} to cart`}
+          whileHover={!isAdded ? { scale: 1.03, backgroundColor: "#4a5d4e" } : {}}
+          whileTap={!isAdded ? { scale: 0.97 } : {}}
+          animate={{ backgroundColor: isAdded ? "#4a5d4e" : "#1c1c1c" }}
+          className="w-full mt-4 text-white py-4 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 cursor-pointer disabled:cursor-default disabled:opacity-100"
         >
-          <ShoppingCart size={14} />
-          Add to Cart
+          {isAdded ? (
+            <>
+              <Check size={14} />
+              Added
+            </>
+          ) : (
+            <>
+              <ShoppingCart size={14} />
+              Add to Cart
+            </>
+          )}
         </motion.button>
       </div>
     </motion.div>
