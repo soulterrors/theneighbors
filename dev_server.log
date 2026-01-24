@@ -8,5 +8,6 @@
 
 ✓ Starting...
 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-✓ Ready in 1288ms
- GET / 200 in 2.5s (compile: 1917ms, proxy.ts: 138ms, render: 436ms)
+✓ Ready in 1344ms
+ GET / 200 in 2.9s (compile: 2.1s, proxy.ts: 137ms, render: 627ms)
+ GET / 200 in 187ms (compile: 6ms, proxy.ts: 9ms, render: 171ms)
