@@ -9,3 +9,7 @@
 ## 2026-01-23 - Font Optimization & CLS
 **Learning:** The project relied on system fonts/unoptimized loading for "EB Garamond" and "Inter", causing potential CLS. `next/font` integration requires applying variable classes to `html` (not just `body`) when using Tailwind v4 to ensure correct cascade over Preflight styles.
 **Action:** Implemented `next/font` in `layout.tsx` and mapped variables in `globals.css` using Tailwind v4 `@theme`.
+
+## 2026-01-24 - Partial Hydration for Footers
+**Learning:** Splitting static footer links (Server Component) from mobile accordion logic (Client Component) significantly reduces hydration cost. The previous monolithic Client Component hydrated everything even on desktop where no interactivity was needed.
+**Action:** Identify other "interactive-only-on-mobile" components (like navigation menus or filters) and apply the same pattern: Server Component shell + Client Component islands for the interactive parts.
