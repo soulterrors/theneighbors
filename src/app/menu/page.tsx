@@ -110,23 +110,30 @@ export default async function OrderPage({
 
             {/* --- PAGINATION CONTROLS --- */}
             <div className="mt-20 flex items-center justify-center gap-4">
-              <Link
-                href={`/order?page=${Math.max(1, currentPage - 1)}`}
-                className={`p-4 rounded-full bg-white border border-stone-200 transition-all ${
-                  currentPage === 1 ? 'opacity-20 pointer-events-none' : 'hover:bg-black hover:text-white'
-                }`}
-              >
-                <ChevronLeft size={20} />
-              </Link>
+              {currentPage === 1 ? (
+                <span className="p-4 rounded-full bg-white border border-stone-200 opacity-20 cursor-not-allowed">
+                  <ChevronLeft size={20} aria-hidden="true" />
+                </span>
+              ) : (
+                <Link
+                  href={`/menu?page=${Math.max(1, currentPage - 1)}`}
+                  aria-label="Previous page"
+                  className="p-4 rounded-full bg-white border border-stone-200 transition-all hover:bg-black hover:text-white"
+                >
+                  <ChevronLeft size={20} aria-hidden="true" />
+                </Link>
+              )}
 
               <div className="flex gap-2">
                 {[...Array(totalPages)].map((_, i) => (
                   <Link
                     key={i}
-                    href={`/order?page=${i + 1}`}
+                    href={`/menu?page=${i + 1}`}
+                    aria-label={`Page ${i + 1}`}
+                    aria-current={currentPage === i + 1 ? 'page' : undefined}
                     className={`w-12 h-12 flex items-center justify-center rounded-full border text-[10px] font-bold transition-all ${
-                      currentPage === i + 1 
-                      ? 'bg-black text-white border-black shadow-lg' 
+                      currentPage === i + 1
+                      ? 'bg-black text-white border-black shadow-lg'
                       : 'bg-white border-stone-200 hover:border-black'
                     }`}
                   >
@@ -135,14 +142,19 @@ export default async function OrderPage({
                 ))}
               </div>
 
-              <Link
-                href={`/order?page=${Math.min(totalPages, currentPage + 1)}`}
-                className={`p-4 rounded-full bg-white border border-stone-200 transition-all ${
-                  currentPage === totalPages ? 'opacity-20 pointer-events-none' : 'hover:bg-black hover:text-white'
-                }`}
-              >
-                <ChevronRight size={20} />
-              </Link>
+              {currentPage === totalPages ? (
+                <span className="p-4 rounded-full bg-white border border-stone-200 opacity-20 cursor-not-allowed">
+                  <ChevronRight size={20} aria-hidden="true" />
+                </span>
+              ) : (
+                <Link
+                  href={`/menu?page=${Math.min(totalPages, currentPage + 1)}`}
+                  aria-label="Next page"
+                  className="p-4 rounded-full bg-white border border-stone-200 transition-all hover:bg-black hover:text-white"
+                >
+                  <ChevronRight size={20} aria-hidden="true" />
+                </Link>
+              )}
             </div>
           </section>
         </div>
