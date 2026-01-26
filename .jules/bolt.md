@@ -17,3 +17,7 @@
 ## 2026-01-25 - Framer Motion in Large Lists
 **Learning:** Using `framer-motion`'s `whileInView` or `whileHover` on list items (like `CoffeeCard`) forces the entire item to be a Client Component, significantly increasing hydration cost.
 **Action:** For lists, prefer standard CSS transitions for hover and native lazy loading for images. Extract interactive buttons into small Client Components ("Islands") to keep the main list item as a Server Component.
+
+## 2026-01-26 - CSS Replacement for Interaction-Free Hovers
+**Learning:** Simple hover effects (scaling, translation) implemented with JS libraries (like Framer Motion) force the parent component to be a Client Component. Replacing these with standard CSS `hover:` classes allows the component (like `Navbar`) to remain a Server Component, reducing JS bundle size.
+**Action:** Audit interactive components; if an interaction is purely visual (hover/focus) and doesn't require state, rewrite it in CSS/Tailwind to avoid `use client`.
