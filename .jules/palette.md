@@ -9,3 +9,7 @@
 ## 2026-01-25 - Pagination Link Accessibility
 **Learning:** Visually disabling links using `pointer-events-none` does not remove them from the keyboard tab order, leaving them accessible and potentially confusing.
 **Action:** When a link is disabled (e.g., current page, first/last page controls), render a non-interactive element (like `span`) instead of a `Link`, or ensure `aria-disabled="true"` and `tabIndex={-1}` are applied if the anchor must remain.
+
+## 2026-02-14 - Responsive Semantics for Interactive Elements
+**Learning:** Components like footer columns that are interactive accordions on mobile but static lists on desktop create "ghost" tab stops if the `<button>` element is used on desktop.
+**Action:** Use responsive utility classes (e.g., `md:hidden`) to physically swap the HTML element from a `<button>` to a static heading (e.g., `<h4>`) on larger screens to match user expectation and remove invalid tab stops.

@@ -15,20 +15,26 @@ export default function FooterColumn({ title, links }: FooterColumnProps) {
 
   return (
     <div className="flex flex-col">
+      {/* Mobile Accordion Trigger */}
       <button
         aria-expanded={isOpen}
-        className="flex items-center justify-between w-full md:cursor-default"
+        className="flex md:hidden items-center justify-between w-full"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h4 className="text-sm font-serif font-bold text-[#1c1c1c] mb-4 uppercase tracking-widest">
+        <span className="text-sm font-serif font-bold text-[#1c1c1c] mb-4 uppercase tracking-widest">
           {title}
-        </h4>
-        <div className="md:hidden text-[#1c1c1c]/40 mb-4">
+        </span>
+        <div className="text-[#1c1c1c]/40 mb-4">
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
             <ChevronDown size={18} />
           </motion.div>
         </div>
       </button>
+
+      {/* Desktop Static Header */}
+      <h4 className="hidden md:block text-sm font-serif font-bold text-[#1c1c1c] mb-4 uppercase tracking-widest">
+        {title}
+      </h4>
 
       {/* Logic: Mobile to Desktop Response */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:block`}>
