@@ -12,3 +12,8 @@
 **Vulnerability:** Static CSP headers fail to account for environment-specific domains like Supabase project URLs, leading to either overly permissive policies (wildcards) or broken functionality in different environments.
 **Learning:** Next.js `next.config.ts` allows dynamic header generation. We can use `process.env` to inject the specific Supabase hostname into the CSP at runtime, ensuring strict security without breaking valid integrations.
 **Prevention:** Construct CSP headers dynamically in `next.config.ts` using environment variables for external services.
+
+## 2026-03-05 - [Middleware Resilience]
+**Vulnerability:** Missing environment variables or Supabase service outage caused the entire application to crash with a 500 error due to unhandled exceptions in middleware.
+**Learning:** Middleware runs on every request. Asserting non-null environment variables (`!`) or failing to catch network errors in middleware creates a single point of failure that can take down the whole site.
+**Prevention:** Always check for existence of critical environment variables in middleware and wrap external service calls (like auth) in `try/catch` blocks to ensure "fail-open" or "fail-secure" behavior without crashing.
