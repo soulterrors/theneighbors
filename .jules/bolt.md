@@ -21,3 +21,7 @@
 ## 2026-01-26 - CSS Replacement for Interaction-Free Hovers
 **Learning:** Simple hover effects (scaling, translation) implemented with JS libraries (like Framer Motion) force the parent component to be a Client Component. Replacing these with standard CSS `hover:` classes allows the component (like `Navbar`) to remain a Server Component, reducing JS bundle size.
 **Action:** Audit interactive components; if an interaction is purely visual (hover/focus) and doesn't require state, rewrite it in CSS/Tailwind to avoid `use client`.
+
+## 2026-01-27 - Landing Page Server Component Conversion
+**Learning:** Using JS animation libraries for above-the-fold content (like Hero sections) forces the entire page to hydrate, delaying interactivity and LCP. Converting these to CSS keyframes allows the Landing Page to remain a Server Component, sending zero JS for the content.
+**Action:** For Hero sections, always prefer CSS `@keyframes` over JS libraries to keep the page static and fast.
