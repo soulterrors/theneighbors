@@ -18,7 +18,7 @@ export function CoffeeCard({ item, variant, priority = false }: { item: CoffeeIt
 
   return (
     <div
-      className="group relative bg-white border border-stone-200 rounded-[2.5rem] p-5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+      className="group relative bg-white border border-stone-200 rounded-[2.5rem] p-5 shadow-sm hover:shadow-2xl focus-within:shadow-2xl transition-all duration-500 hover:-translate-y-2 focus-within:-translate-y-2"
     >
       <div className={`relative overflow-hidden rounded-[2rem] mb-6 bg-stone-50 ${
         isBook ? 'aspect-[2/3]' : 'aspect-square'
@@ -29,7 +29,7 @@ export function CoffeeCard({ item, variant, priority = false }: { item: CoffeeIt
           fill
           priority={shouldPrioritize}
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-          className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-in-out"
+          className="object-cover group-hover:scale-110 group-focus-within:scale-110 transition-transform duration-1000 ease-in-out"
         />
         
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md p-2 rounded-full shadow-sm">

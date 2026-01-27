@@ -23,6 +23,7 @@ export default function AddToCartButton({ itemName }: AddToCartButtonProps) {
       className={`
         w-full mt-4 text-white py-4 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold
         flex items-center justify-center gap-2 cursor-pointer disabled:cursor-default
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1c1c1c] focus-visible:ring-offset-2
         transition-all duration-300 ease-out
         ${isAdded
           ? 'bg-[#4a5d4e] scale-100'
