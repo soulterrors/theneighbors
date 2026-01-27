@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Sparkles, Leaf, Coffee, ArrowDown } from 'lucide-react';
@@ -38,37 +35,28 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#f4f1ea] mb-6 block font-medium"
+          <span
+            className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#f4f1ea] mb-6 block font-medium opacity-0 animate-fade-in-up"
           >
             Est. 2026 — Ohio
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-8xl font-serif italic text-[#f4f1ea] mb-8 leading-tight"
+          </span>
+          <h1
+            style={{ animationDelay: '0.2s' }}
+            className="text-4xl sm:text-5xl md:text-8xl font-serif italic text-[#f4f1ea] mb-8 leading-tight opacity-0 animate-fade-in-up"
           >
             Caffeine & Chapters
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="text-[#f4f1ea]/80 max-w-lg mx-auto font-sans text-xs sm:text-sm md:text-base leading-relaxed mb-10 tracking-wide"
+          </h1>
+          <p
+            style={{ animationDelay: '0.5s' }}
+            className="text-[#f4f1ea]/80 max-w-lg mx-auto font-sans text-xs sm:text-sm md:text-base leading-relaxed mb-10 tracking-wide opacity-0 animate-fade-in-up"
           >
             A quiet corner for the curious. Carefully curated beans paired with deeply moving stories.
-          </motion.p>
+          </p>
           
           {/* Buttons: Added w-full on mobile to prevent squishing in landscape */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto"
+          <div
+            style={{ animationDelay: '0.8s' }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto opacity-0 animate-fade-in-up"
           >
             <Link 
               href="/coffee" 
@@ -82,17 +70,15 @@ export default function Home() {
             >
               Browse Books
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         {/* Scroll Indicator: Hidden on small height viewports */}
-        <motion.div 
-          animate={{ y: [0, 10, 0] }} 
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#f4f1ea]/50 hidden lg:block"
+        <div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#f4f1ea]/50 hidden lg:block animate-float"
         >
           <ArrowDown size={20} strokeWidth={1} />
-        </motion.div>
+        </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-6 py-24 space-y-32">
@@ -153,9 +139,8 @@ export default function Home() {
 
         {/* --- SECONDARY TILES --- */}
         <div className="grid md:grid-cols-2 gap-8">
-          <motion.section 
-            whileHover={{ y: -4 }}
-            className="bg-[#d4e9e2] text-[#1e3932] p-8 md:p-12 text-center flex flex-col items-center justify-center space-y-4 rounded-sm border border-[#1e3932]/10"
+          <section
+            className="bg-[#d4e9e2] text-[#1e3932] p-8 md:p-12 text-center flex flex-col items-center justify-center space-y-4 rounded-sm border border-[#1e3932]/10 hover:-translate-y-1 transition-transform duration-300"
           >
             <h3 className="text-2xl font-serif font-bold italic">The Neighborhood Philosophy</h3>
             <p className="text-xs uppercase tracking-widest leading-loose max-w-xs">
@@ -164,11 +149,10 @@ export default function Home() {
             <Link href="/about" className="text-[10px] border-b border-[#1e3932] pb-1 uppercase tracking-widest font-bold">
               Our Story
             </Link>
-          </motion.section>
+          </section>
 
-          <motion.section 
-            whileHover={{ y: -4 }}
-            className="bg-[#f2f0eb] text-[#2c2926] p-8 md:p-12 text-center flex flex-col items-center justify-center space-y-4 border border-[#dcd7cc] rounded-sm"
+          <section
+            className="bg-[#f2f0eb] text-[#2c2926] p-8 md:p-12 text-center flex flex-col items-center justify-center space-y-4 border border-[#dcd7cc] rounded-sm hover:-translate-y-1 transition-transform duration-300"
           >
             <h3 className="text-2xl font-serif font-bold">New Chapters</h3>
             <p className="text-xs uppercase tracking-widest leading-loose max-w-xs">
@@ -177,7 +161,7 @@ export default function Home() {
             <Link href="/library" className="text-[10px] border-b border-[#2c2926] pb-1 uppercase tracking-widest font-bold">
               Browse Library
             </Link>
-          </motion.section>
+          </section>
         </div>
 
         {/* --- SECRET MENU --- */}
