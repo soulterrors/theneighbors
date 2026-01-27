@@ -17,3 +17,8 @@
 **Vulnerability:** Missing environment variables or Supabase service outage caused the entire application to crash with a 500 error due to unhandled exceptions in middleware.
 **Learning:** Middleware runs on every request. Asserting non-null environment variables (`!`) or failing to catch network errors in middleware creates a single point of failure that can take down the whole site.
 **Prevention:** Always check for existence of critical environment variables in middleware and wrap external service calls (like auth) in `try/catch` blocks to ensure "fail-open" or "fail-secure" behavior without crashing.
+
+## 2026-01-27 - [Negative Pagination Offset]
+**Vulnerability:** User-controlled pagination parameter (`page`) was used to calculate database offsets without validation, allowing negative values.
+**Learning:** Even simple arithmetic on user input can lead to invalid database queries (e.g., negative `OFFSET`) or application errors if not clamped to valid ranges.
+**Prevention:** Always validate and sanitize numeric inputs, especially when used for database cursors or offsets (e.g., `Math.max(1, input)`).

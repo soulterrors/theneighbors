@@ -19,7 +19,8 @@ export default async function OrderPage({
   
   // 1. Handle Pagination Logic
   const params = await searchParams;
-  const currentPage = Number(params.page) || 1;
+  // 🛡️ Sentinel: Validate input to prevent negative offsets/invalid range
+  const currentPage = Math.max(1, Number(params.page) || 1);
   const from = (currentPage - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
 
