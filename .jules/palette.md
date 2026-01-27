@@ -13,3 +13,7 @@
 ## 2026-02-14 - Responsive Semantics for Interactive Elements
 **Learning:** Components like footer columns that are interactive accordions on mobile but static lists on desktop create "ghost" tab stops if the `<button>` element is used on desktop.
 **Action:** Use responsive utility classes (e.g., `md:hidden`) to physically swap the HTML element from a `<button>` to a static heading (e.g., `<h4>`) on larger screens to match user expectation and remove invalid tab stops.
+
+## 2026-03-01 - Mirroring Hover Effects for Keyboard Users
+**Learning:** Complex interactive cards often rely on `hover` for affordance (lift, zoom), leaving keyboard users without the same context or delight.
+**Action:** Use `focus-within` on the card container to mirror `hover` styles, ensuring that focusing any child element (like a button) triggers the card's "active" state.
