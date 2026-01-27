@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
@@ -13,8 +14,11 @@ interface NavbarMobileProps {
 export default function NavbarMobile({ navLinks }: NavbarMobileProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
     const mediaQuery = window.matchMedia('(min-width: 1024px)');
 
     const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
@@ -38,16 +42,20 @@ export default function NavbarMobile({ navLinks }: NavbarMobileProps) {
         <Menu size={24} strokeWidth={1.2} />
       </button>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
+      {/* Mobile Menu Overlay - Portaled to Body to avoid z-index/clipping issues */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {isMenuOpen && (
             <motion.div
+              key="overlay"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
               className="fixed inset-0 bg-[#1c1c1c]/30 backdrop-blur-sm z-[104]"
             />
+          )}
+          {isMenuOpen && (
             <motion.div
+              key="menu"
               initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 h-full w-[320px] bg-[#ece9e1] z-[105] shadow-2xl border-l border-[#dcd7cc] overflow-y-auto overflow-x-hidden"
@@ -78,9 +86,10 @@ export default function NavbarMobile({ navLinks }: NavbarMobileProps) {
                 </div>
               </div>
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }
