@@ -1,55 +1,60 @@
 import { getSupabase } from '@/src/utils/supabase/server';
-import { CoffeeCard } from '@/src/components/CoffeeCard'; 
+import { CoffeeCard, type CoffeeItem } from '@/src/components/CoffeeCard';
 import { Star, Leaf, Coffee as CoffeeIcon, ChevronRight } from 'lucide-react';
-import * as motion from 'framer-motion/client';
 import Link from 'next/link';
 
 export const revalidate = 3600;
 
 export default async function CoffeePage() {
-  const supabase = await getSupabase();
-  
-  // PARALLEL QUERIES FOR SCALABILITY
-  const [featuredData, greenhouseData, regularsData] = await Promise.all([
-    // Query 1: Featured (Limit 3, price > 6.00)
-    supabase
-      .from('products')
-      .select('id, name, price, image_url, description, category')
-      .eq('category', 'coffee')
-      .gt('price', 6.00)
-      .limit(3),
+  let featured: CoffeeItem[] = [];
+  let greenhouse: CoffeeItem[] = [];
+  let regulars: CoffeeItem[] = [];
 
-    // Query 2: Greenhouse (Limit 6, text search)
-    supabase
-      .from('products')
-      .select('id, name, price, image_url, description, category')
-      .eq('category', 'coffee')
-      .or('description.ilike.%greenhouse%,name.ilike.%Matcha%')
-      .limit(6),
+  try {
+    const supabase = await getSupabase();
 
-    // Query 3: Regulars (Limit 12, general selection)
-    supabase
-      .from('products')
-      .select('id, name, price, image_url, description, category')
-      .eq('category', 'coffee')
-      .limit(12)
-  ]);
+    // PARALLEL QUERIES FOR SCALABILITY
+    const [featuredData, greenhouseData, regularsData] = await Promise.all([
+      // Query 1: Featured (Limit 3, price > 6.00)
+      supabase
+        .from('products')
+        .select('id, name, price, image_url, description, category')
+        .eq('category', 'coffee')
+        .gt('price', 6.00)
+        .limit(3),
 
-  const featured = featuredData.data || [];
-  const greenhouse = greenhouseData.data || [];
-  const regulars = regularsData.data || [];
+      // Query 2: Greenhouse (Limit 6, text search)
+      supabase
+        .from('products')
+        .select('id, name, price, image_url, description, category')
+        .eq('category', 'coffee')
+        .or('description.ilike.%greenhouse%,name.ilike.%Matcha%')
+        .limit(6),
+
+      // Query 3: Regulars (Limit 12, general selection)
+      supabase
+        .from('products')
+        .select('id, name, price, image_url, description, category')
+        .eq('category', 'coffee')
+        .limit(12)
+    ]);
+
+    featured = featuredData.data || [];
+    greenhouse = greenhouseData.data || [];
+    regulars = regularsData.data || [];
+  } catch (error) {
+    console.warn("Supabase fetch failed, using fallback data:", error);
+  }
 
   return (
     <main className="min-h-screen bg-[#fdfcf8] text-[#1c1c1c] pb-32 px-4 md:px-8">
       
       <header className="pt-24 pb-8 text-center">
-        <motion.h1 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-8xl font-serif italic tracking-tighter"
+        <h1
+          className="text-5xl md:text-8xl font-serif italic tracking-tighter animate-fade-in-up"
         >
           The Neighbors
-        </motion.h1>
+        </h1>
         <p className="text-stone-400 text-[10px] uppercase tracking-[0.6em] mt-6 font-bold">
           Coffee & Botanical Brews
         </p>
@@ -107,15 +112,12 @@ export default async function CoffeePage() {
 
 const ViewAllButton = () => (
   <div className="flex justify-center py-12">
-    <Link href="/coffee/all">
-      <motion.button
-        whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
-        whileTap={{ scale: 0.95 }}
-        className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
-      >
-        Browse All Drinks
-        <ChevronRight size={14} className="opacity-40" />
-      </motion.button>
+    <Link
+      href="/coffee/all"
+      className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent hover:scale-105 hover:bg-[#1c1c1c] hover:text-white active:scale-95"
+    >
+      Browse All Drinks
+      <ChevronRight size={14} className="opacity-40" />
     </Link>
   </div>
 );

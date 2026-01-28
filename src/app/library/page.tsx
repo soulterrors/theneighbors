@@ -1,42 +1,49 @@
 import { getSupabase } from '@/src/utils/supabase/server';
-import { CoffeeCard } from '@/src/components/CoffeeCard'; 
+import { CoffeeCard, type CoffeeItem } from '@/src/components/CoffeeCard';
 import { Bookmark, Sparkles, Heart, ChevronRight } from 'lucide-react';
-import * as motion from 'framer-motion/client';
 import Link from 'next/link';
 
 export const revalidate = 3600; // Vercel Speed Boost
 
 export default async function LibraryPage() {
-  const supabase = await getSupabase();
-  
-  // PARALLEL QUERIES FOR SCALABILITY
-  const [favoritesData, staffPicksData, classicsData] = await Promise.all([
-    // Query 1: Favorites (Limit 3)
-    supabase
-      .from('products')
-      .select('id, name, price, image_url, description, category')
-      .eq('category', 'book')
-      .limit(3),
+  let favorites: CoffeeItem[] = [];
+  let staffPicks: CoffeeItem[] = [];
+  let classics: CoffeeItem[] = [];
 
-    // Query 2: Staff Picks (Limit 6, Price > 15)
-    supabase
-      .from('products')
-      .select('id, name, price, image_url, description, category')
-      .eq('category', 'book')
-      .gt('price', 15)
-      .limit(6),
+  try {
+    const supabase = await getSupabase();
 
-    // Query 3: Classics (Limit 12, general selection)
-    supabase
-      .from('products')
-      .select('id, name, price, image_url, description, category')
-      .eq('category', 'book')
-      .limit(12)
-  ]);
+    // PARALLEL QUERIES FOR SCALABILITY
+    const [favoritesData, staffPicksData, classicsData] = await Promise.all([
+      // Query 1: Favorites (Limit 3)
+      supabase
+        .from('products')
+        .select('id, name, price, image_url, description, category')
+        .eq('category', 'book')
+        .limit(3),
 
-  const favorites = favoritesData.data || [];
-  const staffPicks = staffPicksData.data || [];
-  const classics = classicsData.data || [];
+      // Query 2: Staff Picks (Limit 6, Price > 15)
+      supabase
+        .from('products')
+        .select('id, name, price, image_url, description, category')
+        .eq('category', 'book')
+        .gt('price', 15)
+        .limit(6),
+
+      // Query 3: Classics (Limit 12, general selection)
+      supabase
+        .from('products')
+        .select('id, name, price, image_url, description, category')
+        .eq('category', 'book')
+        .limit(12)
+    ]);
+
+    favorites = favoritesData.data || [];
+    staffPicks = staffPicksData.data || [];
+    classics = classicsData.data || [];
+  } catch (error) {
+    console.warn("Supabase fetch failed, using fallback data:", error);
+  }
 
   if (favorites.length === 0 && staffPicks.length === 0 && classics.length === 0) {
     return (
@@ -51,10 +58,8 @@ export default async function LibraryPage() {
       
       {/* HEADER */}
       <header className="pt-24 pb-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        <div
+          className="animate-fade-in-up"
         >
           <h1 className="text-6xl md:text-8xl font-serif italic tracking-tighter">
             The Library
@@ -62,7 +67,7 @@ export default async function LibraryPage() {
           <p className="text-stone-400 text-[10px] uppercase tracking-[0.6em] mt-6 font-bold">
             Quiet Corners & Neighbors&apos; Picks
           </p>
-        </motion.div>
+        </div>
       </header>
 
       {/* TOP VIEW ALL */}
@@ -126,15 +131,12 @@ export default async function LibraryPage() {
 
 const ViewAllButton = () => (
   <div className="flex justify-center py-12">
-    <Link href="/library/all">
-      <motion.button
-        whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
-        whileTap={{ scale: 0.95 }}
-        className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
-      >
-        Browse All Books
-        <ChevronRight size={14} className="opacity-40" />
-      </motion.button>
+    <Link
+      href="/library/all"
+      className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent hover:scale-105 hover:bg-[#1c1c1c] hover:text-white active:scale-95"
+    >
+      Browse All Books
+      <ChevronRight size={14} className="opacity-40" />
     </Link>
   </div>
 );
