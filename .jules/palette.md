@@ -17,3 +17,7 @@
 ## 2026-03-01 - Mirroring Hover Effects for Keyboard Users
 **Learning:** Complex interactive cards often rely on `hover` for affordance (lift, zoom), leaving keyboard users without the same context or delight.
 **Action:** Use `focus-within` on the card container to mirror `hover` styles, ensuring that focusing any child element (like a button) triggers the card's "active" state.
+
+## 2026-03-02 - Invalid Interactive Nesting
+**Learning:** Nesting a `<button>` inside a `<Link>` is invalid HTML and can confuse screen readers, despite looking correct visually.
+**Action:** Replace the inner `<button>` with a `<span>` (or `div`), and use the `group` class on the parent `<Link>` combined with `group-focus-visible` on the child to apply focus rings that match the custom styled element.
