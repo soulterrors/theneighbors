@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { BookOpen, Coffee } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
 
-interface CoffeeItem {
+export interface CoffeeItem {
   id?: number | string;
   name: string;
   price: number;

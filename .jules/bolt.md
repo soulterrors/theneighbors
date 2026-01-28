@@ -25,3 +25,7 @@
 ## 2026-01-27 - Landing Page Server Component Conversion
 **Learning:** Using JS animation libraries for above-the-fold content (like Hero sections) forces the entire page to hydrate, delaying interactivity and LCP. Converting these to CSS keyframes allows the Landing Page to remain a Server Component, sending zero JS for the content.
 **Action:** For Hero sections, always prefer CSS `@keyframes` over JS libraries to keep the page static and fast.
+
+## 2026-01-28 - CSS over Framer Motion in Server Components
+**Learning:** Using `framer-motion/client` primitives (like `motion.h1`) in Server Components forces those elements to be client boundaries, adding unnecessary hydration cost for simple animations. Also, invalid HTML (button inside link) can cause issues.
+**Action:** Replaced simple entry and hover animations with CSS keyframes (`animate-fade-in-up`) and Tailwind utilities. Fixed invalid HTML by styling `Link` directly. Wrapped Supabase calls in try/catch to prevent build/runtime crashes on missing env vars.
