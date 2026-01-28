@@ -22,3 +22,8 @@
 **Vulnerability:** User-controlled pagination parameter (`page`) was used to calculate database offsets without validation, allowing negative values.
 **Learning:** Even simple arithmetic on user input can lead to invalid database queries (e.g., negative `OFFSET`) or application errors if not clamped to valid ranges.
 **Prevention:** Always validate and sanitize numeric inputs, especially when used for database cursors or offsets (e.g., `Math.max(1, input)`).
+
+## 2026-10-24 - [Defense in Depth Headers]
+**Vulnerability:** Missing `X-Permitted-Cross-Domain-Policies` and permissive `Permissions-Policy` headers.
+**Learning:** Security is not just about patching known exploits but also reducing attack surface. Restricting cross-domain policies (Flash/PDF) and disabling unused browser features (Payment, Browsing Topics) minimizes potential abuse vectors.
+**Prevention:** Explicitly set `X-Permitted-Cross-Domain-Policies: none` and strictly define `Permissions-Policy` in `next.config.ts`.
