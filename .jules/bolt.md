@@ -25,3 +25,7 @@
 ## 2026-01-27 - Landing Page Server Component Conversion
 **Learning:** Using JS animation libraries for above-the-fold content (like Hero sections) forces the entire page to hydrate, delaying interactivity and LCP. Converting these to CSS keyframes allows the Landing Page to remain a Server Component, sending zero JS for the content.
 **Action:** For Hero sections, always prefer CSS `@keyframes` over JS libraries to keep the page static and fast.
+
+## 2026-01-28 - Removal of `framer-motion/client` for Simple Animations
+**Learning:** Even when using `framer-motion/client` to use motion components in Server Components, these components still hydrate and add to the bundle size. For simple entrance animations (fade-in) and hover effects, standard CSS is far superior as it requires zero hydration.
+**Action:** Replace `motion.h1`, `motion.div`, etc., with standard HTML tags and CSS animation classes (`animate-fade-in-up`) wherever complex physics-based animation is not required.
