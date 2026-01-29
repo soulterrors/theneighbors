@@ -30,8 +30,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${ebGaramond.variable}`}>
       <body className="antialiased">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:z-[200] focus:top-4 focus:left-4 focus:px-6 focus:py-3 focus:bg-[#ece9e1] focus:text-[#1c1c1c] focus:font-bold focus:shadow-lg focus:rounded-md transition-all"
+          >
+            Skip to content
+          </a>
           <Navbar />
-          <main>{children}</main>
+          <main id="main-content" tabIndex={-1} className="outline-none">{children}</main>
           <Footer />
       </body>
     </html>

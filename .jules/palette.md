@@ -17,3 +17,7 @@
 ## 2026-03-01 - Mirroring Hover Effects for Keyboard Users
 **Learning:** Complex interactive cards often rely on `hover` for affordance (lift, zoom), leaving keyboard users without the same context or delight.
 **Action:** Use `focus-within` on the card container to mirror `hover` styles, ensuring that focusing any child element (like a button) triggers the card's "active" state.
+
+## 2026-10-27 - Skip Link Focus Management
+**Learning:** When implementing a "Skip to Content" link, simply linking to the ID of the main container isn't enough; the container itself must receive focus programmatically.
+**Action:** Ensure the target element (e.g., `<main id="main-content">`) has `tabIndex={-1}` and `outline-none` so that focus moves correctly when the link is clicked, without creating a visual focus ring on the container.
