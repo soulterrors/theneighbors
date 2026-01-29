@@ -1,7 +1,6 @@
 import { getSupabase } from '@/src/utils/supabase/server';
 import { CoffeeCard } from '@/src/components/CoffeeCard'; 
 import { Star, Leaf, Coffee as CoffeeIcon, ChevronRight } from 'lucide-react';
-import * as motion from 'framer-motion/client';
 import Link from 'next/link';
 
 export const revalidate = 3600;
@@ -43,13 +42,11 @@ export default async function CoffeePage() {
     <main className="min-h-screen bg-[#fdfcf8] text-[#1c1c1c] pb-32 px-4 md:px-8">
       
       <header className="pt-24 pb-8 text-center">
-        <motion.h1 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-8xl font-serif italic tracking-tighter"
+        <h1
+          className="text-5xl md:text-8xl font-serif italic tracking-tighter animate-fade-in-up"
         >
           The Neighbors
-        </motion.h1>
+        </h1>
         <p className="text-stone-400 text-[10px] uppercase tracking-[0.6em] mt-6 font-bold">
           Coffee & Botanical Brews
         </p>
@@ -107,15 +104,12 @@ export default async function CoffeePage() {
 
 const ViewAllButton = () => (
   <div className="flex justify-center py-12">
-    <Link href="/coffee/all">
-      <motion.button
-        whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
-        whileTap={{ scale: 0.95 }}
-        className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
-      >
-        Browse All Drinks
-        <ChevronRight size={14} className="opacity-40" />
-      </motion.button>
+    <Link
+      href="/coffee/all"
+      className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent hover:scale-105 hover:bg-[#1c1c1c] hover:text-white active:scale-95"
+    >
+      Browse All Drinks
+      <ChevronRight size={14} className="opacity-40" />
     </Link>
   </div>
 );
