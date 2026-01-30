@@ -25,3 +25,7 @@
 ## 2026-01-27 - Landing Page Server Component Conversion
 **Learning:** Using JS animation libraries for above-the-fold content (like Hero sections) forces the entire page to hydrate, delaying interactivity and LCP. Converting these to CSS keyframes allows the Landing Page to remain a Server Component, sending zero JS for the content.
 **Action:** For Hero sections, always prefer CSS `@keyframes` over JS libraries to keep the page static and fast.
+
+## 2026-01-28 - Zero-JS Page Transitions
+**Learning:** Even using `import * as motion from 'framer-motion/client'` in a Server Component pulls in client-side JS for the animation primitives. For simple entry animations (fade-in-up) and hover states, pure CSS/Tailwind replacements allow the entire page to remain static HTML, significantly reducing TTI.
+**Action:** Audit all usages of `motion.h1`, `motion.div`, etc. If the animation is a simple "on mount" or "hover", replace with CSS keyframes and `group-hover` classes.
