@@ -62,14 +62,16 @@ const nextConfig: NextConfig = {
             value: 'strict-origin-when-cross-origin'
           },
           {
+            // 🛡️ Sentinel: Strictly disable sensitive features
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()'
+            value: 'camera=(), microphone=(), geolocation=(), payment=(), browsing-topics=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()'
           },
           {
             key: 'Content-Security-Policy',
+            // 🛡️ Sentinel: Disable unsafe-eval to prevent XSS
             value: `
               default-src 'self';
-              script-src 'self' 'unsafe-eval' 'unsafe-inline';
+              script-src 'self' 'unsafe-inline';
               style-src 'self' 'unsafe-inline';
               img-src 'self' blob: data: https://images.unsplash.com ${supabaseHostname ? `https://${supabaseHostname}` : ''};
               font-src 'self' data:;
