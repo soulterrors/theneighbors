@@ -3,6 +3,7 @@ import { Inter, EB_Garamond } from 'next/font/google';
 import "./globals.css";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
+import SkipLink from "@/src/components/SkipLink";
 
 // Optimize font loading with next/font to prevent CLS and self-host fonts
 const inter = Inter({
@@ -30,8 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${ebGaramond.variable}`}>
       <body className="antialiased">
+          <SkipLink />
           <Navbar />
-          <main>{children}</main>
+          <main id="main-content" tabIndex={-1} className="outline-none">
+            {children}
+          </main>
           <Footer />
       </body>
     </html>
