@@ -1,8 +1,8 @@
 import { getSupabase } from '@/src/utils/supabase/server';
 import { CoffeeCard } from '@/src/components/CoffeeCard'; 
-import { Bookmark, Sparkles, Heart, ChevronRight } from 'lucide-react';
+import { Bookmark, Sparkles, Heart } from 'lucide-react';
 import * as motion from 'framer-motion/client';
-import Link from 'next/link';
+import ViewAllButton from '@/src/components/ViewAllButton';
 
 export const revalidate = 3600; // Vercel Speed Boost
 
@@ -66,7 +66,7 @@ export default async function LibraryPage() {
       </header>
 
       {/* TOP VIEW ALL */}
-      <ViewAllButton />
+      <ViewAllButton href="/library/all" label="Browse All Books" />
 
       <div className="max-w-7xl mx-auto space-y-16">
         
@@ -118,23 +118,8 @@ export default async function LibraryPage() {
       </div>
 
       {/* BOTTOM VIEW ALL */}
-      <ViewAllButton />
+      <ViewAllButton href="/library/all" label="Browse All Books" />
       
     </main>
   );
 }
-
-const ViewAllButton = () => (
-  <div className="flex justify-center py-12">
-    <Link href="/library/all">
-      <motion.button
-        whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
-        whileTap={{ scale: 0.95 }}
-        className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
-      >
-        Browse All Books
-        <ChevronRight size={14} className="opacity-40" />
-      </motion.button>
-    </Link>
-  </div>
-);
