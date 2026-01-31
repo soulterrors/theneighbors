@@ -1,8 +1,8 @@
 import { getSupabase } from '@/src/utils/supabase/server';
 import { CoffeeCard } from '@/src/components/CoffeeCard'; 
-import { Star, Leaf, Coffee as CoffeeIcon, ChevronRight } from 'lucide-react';
+import { Star, Leaf, Coffee as CoffeeIcon } from 'lucide-react';
 import * as motion from 'framer-motion/client';
-import Link from 'next/link';
+import ViewAllButton from '@/src/components/ViewAllButton';
 
 export const revalidate = 3600;
 
@@ -55,7 +55,7 @@ export default async function CoffeePage() {
         </p>
       </header>
 
-      <ViewAllButton />
+      <ViewAllButton href="/coffee/all" label="Browse All Drinks" />
 
       <div className="max-w-7xl mx-auto space-y-16">
         
@@ -100,22 +100,7 @@ export default async function CoffeePage() {
 
       </div>
 
-      <ViewAllButton />
+      <ViewAllButton href="/coffee/all" label="Browse All Drinks" />
     </main>
   );
 }
-
-const ViewAllButton = () => (
-  <div className="flex justify-center py-12">
-    <Link href="/coffee/all">
-      <motion.button
-        whileHover={{ scale: 1.05, backgroundColor: "#1c1c1c", color: "#fff" }}
-        whileTap={{ scale: 0.95 }}
-        className="px-10 py-4 rounded-full border-2 border-stone-200 text-stone-800 text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-3 bg-white shadow-sm hover:border-transparent"
-      >
-        Browse All Drinks
-        <ChevronRight size={14} className="opacity-40" />
-      </motion.button>
-    </Link>
-  </div>
-);
